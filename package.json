@@ -1,0 +1,19 @@
+{
+  "name": "oblig-2",
+  "version": "1.0.0",
+  "description": "2nd Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vovegog/Oblig-2.git"
+  },
+  "author": "Daniel Viggen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vovegog/Oblig-2/issues"
+  },
+  "homepage": "https://github.com/Vovegog/Oblig-2#readme"
+}
