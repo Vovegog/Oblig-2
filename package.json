@@ -4,7 +4,9 @@
   "description": "2nd Assignment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx tsc --outDir dist/ && node dist/main.js",
+    "dev": "node ./node_modules/nodemon/bin/nodemon.js -e ts --watch ./src --exec \"npm run compile\" || exit 1"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/Vovegog/Oblig-2/issues"
   },
-  "homepage": "https://github.com/Vovegog/Oblig-2#readme"
+  "homepage": "https://github.com/Vovegog/Oblig-2#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  }
 }
