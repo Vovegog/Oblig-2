@@ -14,6 +14,12 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
     next();
 });
 
+// POST method's go here
+
+
+// GET method's go here
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
