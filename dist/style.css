@@ -1,0 +1,15 @@
+.checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  max-width: 600px;
+  border: 1px solid #ccc;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  cursor: pointer;
+}
