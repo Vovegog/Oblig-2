@@ -2,24 +2,18 @@ import express, { Express, NextFunction, Request, Response } from 'express';
 import path from 'path';
 
 const app: Express = express();
-const port = 80;
+const port: number = 80;
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-app.use(function (req: Request, res: Response, next: NextFunction) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
+app.use(function(inRequest: Request, inResponse: Response, inNext: NextFunction) {
+    inResponse.header('Access-Control-Allow-Origin', '*');
+    inResponse.header('Access-Control-Allow-Methods', 'GET,POST');
+    inResponse.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    inNext();
 });
-
-// POST method's go here
-
-
-// GET method's go here
 
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server started, listening on port ${port}.`);
 });

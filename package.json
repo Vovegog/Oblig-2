@@ -1,8 +1,8 @@
 {
   "name": "oblig-2",
   "version": "1.0.0",
-  "description": "2nd Assignment",
-  "main": "index.js",
+  "description": "Assignment nr2",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "npx tsc --outDir dist/ && node dist/server.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Vovegog/Oblig-2.git"
   },
-  "author": "Daniel Viggen",
+  "author": "Daniel",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Vovegog/Oblig-2/issues"
@@ -28,6 +28,7 @@
     "@types/express": "^4.17.21",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@types/typescript": "^2.0.0",
     "typescript": "^5.4.3"
   }
 }
