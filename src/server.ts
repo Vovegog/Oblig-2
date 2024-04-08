@@ -44,8 +44,9 @@ app.post('/apicall', async (req: Request, res: Response) => {
         body: query
     })
     .then((response:any) => {
-        let ds = JSONstat(response);
+        dataset = response;
         console.log('Dataset:', response);
+        let ds = JSONstat(response);
         let dslabel = ds.label;
         let nobs = ds.n;
         let upd = ds.updated;
