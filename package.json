@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Vovegog/Oblig-2#readme",
   "dependencies": {
     "express": "^4.19.2",
+    "jsonstat-toolkit": "^1.4.2",
     "nodemon": "^3.1.0"
   },
   "devDependencies": {
