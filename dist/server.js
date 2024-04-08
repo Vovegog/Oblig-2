@@ -32,9 +32,8 @@ app.listen(port, () => {
 });
 let dataset = {};
 let query = {};
-function createDataset(input) {
-    return input.Dataset(0);
-}
+let version = JSONstat("version");
+console.log('JSONstat Version: ', version);
 app.post('/apicall', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('Got a POST request\n');
     query = JSON.stringify(req.body);
@@ -48,16 +47,18 @@ app.post('/apicall', (req, res) => __awaiter(void 0, void 0, void 0, function* (
         body: query
     })
         .then((response) => {
-        dataset = createDataset(response);
-        console.log('Dataset:', dataset, "\n");
-    })
-        .then((dataset) => {
-        try {
-            console.log('Dataset: ', dataset.Dataset(0));
-        }
-        catch (error) {
-            console.error('Error: ', error);
-        }
+        let ds = JSONstat(response);
+        console.log('Dataset:', response);
+        let dslabel = ds.label;
+        let nobs = ds.n;
+        let upd = ds.updated;
+        let ndim = ds.length;
+        let dimid = ds.id;
+        console.log('Dataset label:', dslabel
+            + '\nNumber of observations:', nobs
+            + '\nLast updated:', upd
+            + '\nNumber of dimensions:', ndim
+            + '\nDimension ID:', dimid);
     });
     return res.status(200).json({ message: 'Great success', dataset: dataset });
 }));
