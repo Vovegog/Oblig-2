@@ -8,6 +8,15 @@ const var2 = ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2
 const var3 = ["1505 Kristiansund", "1506 Molde", "1508 Ålesund", "1554 Averøy"];
 const var3_values = ["1505", "1506", "1508", "1554"];
 
+/* ----------------- VARIABLES ----------------- */
+// Declare our variables
+let JSON_query = {};
+let queryResponse = {};
+let dstable = [];
+const url = 'http://localhost:80/apicall';
+
+/* ----------------- FUNCTIONS ----------------- */
+
 // Create a checkbox class for easy construction
 class Checkboxes {
     constructor(name, id, value) {
@@ -18,10 +27,6 @@ class Checkboxes {
         this.value = value;
     }
 }
-// Declare our variables
-let JSON_query = {};
-let queryResponse = {};
-const url = 'http://localhost:80/apicall';
 
 // Use the class to create the checkboxes
 checkboxes1.innerHTML = var1.map((item, index) => {
@@ -81,6 +86,31 @@ function getCheckedValues() {
     }
 }
 
+function tableCreate(dstable) {
+    let table = document.createElement('table');
+    let header = table.createTHead();
+    let row = header.insertRow(0);
+    let cell = row.insertCell(0);
+    cell.innerHTML = "Region";
+    cell = row.insertCell(1);
+    cell.innerHTML = "Statistikkvariabel";
+    cell = row.insertCell(2);
+    cell.innerHTML = "År";
+    cell = row.insertCell(3);
+    cell.innerHTML = "Verdi";
+    let body = table.createTBody();
+    for (let i = 1; i < dstable.length; i++) {
+        let row = body.insertRow(i - 1);
+        for (let j = 0; j < dstable[i].length; j++) {
+            let cell = row.insertCell(j);
+            cell.innerHTML = dstable[i][j];
+        }
+    }
+    return table;
+}
+
+/* ----------------- API CALL ----------------- */
+
 // Now we need to assign the getcheckedvalues function to button with id "check_variables" with an onClick function in our HTML file
 // We need to wrap it in a function, this way we can call the API with the checked values as arguments if we have all checkboxes needed checked
 async function API_callFunction() {
@@ -89,19 +119,33 @@ async function API_callFunction() {
       console.log(JSON_query); // Check if the query is correct. And it seems like it is!
 
       // Now we need to send the JSON query to the URL using a fetch POST request
-    await fetch (url, {
+    await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON_query,
-    }) 
+    })
     .then(response => queryResponse = response.json())
-    .then(queryResponse => console.log(queryResponse))
+    .then(queryResponse => {
+    if (queryResponse !== undefined) {
+        console.log(queryResponse);
+        dstable = queryResponse.table;
+        console.log(dstable);
+        // Check if the div is empty, if not, clear it
+        if (document.getElementById('SSB_table').innerHTML !== "") {
+            document.getElementById('SSB_table').innerHTML = "";
+        }
+        // Now we append the table to the div with id "SSB_table" by running the tableCreate function
+        document.getElementById('SSB_table').appendChild(tableCreate(dstable));
+    }
+    })
   } catch (error) {
       console.log(error);
   }
 };
+
+/* ----------------- EVENT LISTENER ----------------- */
 
 // Now we need to assign the API_callFunction to our button with id "check_variables" with an onClick function in our HTML file
 document.getElementById('check_variables').addEventListener('click', API_callFunction);

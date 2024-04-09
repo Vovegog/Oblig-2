@@ -31,6 +31,7 @@ app.listen(port, () => {
     console.log(`Server started, listening on port ${port}.`);
 });
 let dataset = {};
+let dstable = {};
 let query = {};
 let version = JSONstat("version");
 console.log('JSONstat Version: ', version);
@@ -55,11 +56,20 @@ app.post('/apicall', (req, res) => __awaiter(void 0, void 0, void 0, function* (
         let upd = ds.updated;
         let ndim = ds.length;
         let dimid = ds.id;
+        dstable = ds.Dataset(0).toTable();
         console.log('Dataset label:', dslabel
             + '\nNumber of observations:', nobs
             + '\nLast updated:', upd
             + '\nNumber of dimensions:', ndim
-            + '\nDimension ID:', dimid);
+            + '\nDimension ID:', dimid
+            + '\nTable:', dstable);
+    })
+        .then(() => {
+        if (dataset && dstable) {
+            return res.status(200).json({ message: 'Great success', dataset: dataset, table: dstable });
+        }
+        else {
+            return res.status(400).json({ message: 'Error' });
+        }
     });
-    return res.status(200).json({ message: 'Great success', dataset: dataset });
 }));

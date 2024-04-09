@@ -24,7 +24,7 @@ app.listen(port, () => {
 
 
 let dataset = {} as BodyInit;
-
+let dstable = {} as BodyInit;
 let query = {} as BodyInit;
 
 let version = JSONstat("version");
@@ -52,14 +52,22 @@ app.post('/apicall', async (req: Request, res: Response) => {
         let upd = ds.updated;
         let ndim = ds.length;
         let dimid = ds.id;
+        dstable = ds.Dataset(0).toTable();
 
         console.log('Dataset label:', dslabel
         + '\nNumber of observations:', nobs
         + '\nLast updated:', upd
         + '\nNumber of dimensions:', ndim
-        + '\nDimension ID:', dimid);
+        + '\nDimension ID:', dimid
+        + '\nTable:', dstable);
     })
-
-    return res.status(200).json({ message: 'Great success', dataset: dataset });
+    .then(() => {
+        if (dataset && dstable) {
+            return res.status(200).json({ message: 'Great success', dataset: dataset, table: dstable });
+        } else {
+            return res.status(400).json({ message: 'Error' });
+        }
+    })
+    
 });
 
