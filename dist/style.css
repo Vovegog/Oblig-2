@@ -1,11 +1,37 @@
 /* ----------------- CSS for checkbox ----------------- */
 
-.checkboxes {
+.checkboxes#selection1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 2px auto;
-  max-width: 1000px;
+  max-width: 400px;
+  min-width: 400px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f3f3f3;
+}
+
+.checkboxes#selection2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 2px auto;
+  max-width: 240px;
+  min-width: 240px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f3f3f3;
+}
+
+.checkboxes#selection3 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 2px auto;
+  max-width: 25%;
   min-width: 600px;
   border: 1px solid #000000;
   border-radius: 5px;
@@ -50,8 +76,8 @@ table {
   table-layout: auto;
   border-collapse: collapse;
   width: 100%;
-  max-width: 1200px;
-  min-width: 1000px;
+  max-width: 700px;
+  min-width: 700px;
   margin: 0 auto;
   border: 2px solid #ccc;
   border-color: #000000;
