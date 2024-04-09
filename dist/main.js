@@ -118,6 +118,54 @@ function tableCreate(dstable) {
     return table;
 }
 
+function doMath() {
+    /* We need to find average, min, max and median of the values in the table created in tableCreate() */
+    /* We know the table is only 4 columns wide, and last column is always where the values are */
+    /* First row is also just string-values containing the column names, so we start at 1 */
+    /* We need to check if the statistics variable with id="variable" in our document has more than 1 box checked. If there are 2 or more, we just return */
+    const checkboxes1 = document.getElementById('selection1');
+    const checkedValues1 = Array.from(checkboxes1.querySelectorAll('input[type="checkbox"]:checked')).map(item => item.value);
+    if (checkedValues1.length > 1) {
+        /* Clear the table with id "Math_table" if it is not empty for good measure */
+        if (document.getElementById('Math_table').innerHTML !== "") {
+            document.getElementById('Math_table').innerHTML = "";
+        }
+        return;
+    }
+    const math_table = document.getElementById('Math_table');
+    let values = [];
+    for (let i = 1; i < dstable.length; i++) {
+        values.push(dstable[i][3]);
+    }
+    /* Now we have all the values in the table in the values array */
+    /* We need to convert them to numbers */
+    values = values.map(Number);
+    /* Now we can find the average */
+    const sum = values.reduce((a, b) => a + b, 0); // Sum of all values. "a" is the accumulator, "b" is the current value being processed. Start with 0
+    const avg = (sum / values.length).toFixed(2); // Average is sum divided by number of values, rounded to 2 decimal places
+    const min = Math.min(...values); // Spread operator to pass all values to Math.min
+    const max = Math.max(...values); // Spread operator to pass all values to Math.max
+    let median = 0;
+    /* We need to find the median */
+    values.sort((a, b) => a - b); // Sort the values in ascending order
+    if (values.length % 2 === 0) { // If the number of values is even
+        median = (values[values.length / 2 - 1] + values[values.length / 2]) / 2; // Median is the average of the two middle values
+    } else { // If the number of values is odd
+        median = values[(values.length - 1) / 2]; // Median is the middle value
+    }
+    /* Now we have the average, min, max and median */
+    /* If "Math_table" is not empty, clear it */
+    if (math_table.innerHTML !== "") {
+        math_table.innerHTML = "";
+    }
+    /* Now we need to inject these numbers into table "Math_table" */
+    math_table.innerHTML = 
+    `<table>` + `<tr><td>Average</td><td>${avg}</td></tr>` + 
+    `<tr><td>Min</td><td>${min}</td></tr>` + 
+    `<tr><td>Max</td><td>${max}</td></tr>` + 
+    `<tr><td>Median</td><td>${median}</td></tr>` + `</table>`
+}
+
 /* ----------------- API CALL ----------------- */
 
 // Now we need to assign the getcheckedvalues function to button with id "check_variables" with an onClick function in our HTML file
@@ -147,6 +195,8 @@ async function API_callFunction() {
         }
         // Now we append the table to the div with id "SSB_table" by running the tableCreate function
         document.getElementById('SSB_table').appendChild(tableCreate(dstable));
+        // Now we need to call the doMath function to calculate average, min, max and median
+        doMath();
     }
     })
   } catch (error) {
