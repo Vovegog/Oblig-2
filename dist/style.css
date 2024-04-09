@@ -4,8 +4,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin: 0 auto;
-  max-width: 500px;
+  margin: 2px auto;
+  max-width: 1000px;
+  min-width: 600px;
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
@@ -17,12 +18,8 @@
   transition: 0.4s;
 }
 
-label {
-  display: flex;
-  align-items: center;
-  padding: 4px;
-  cursor: pointer;
-}
+
+
 
 /* ----------------- CSS for button ----------------- */
 button {
@@ -85,4 +82,15 @@ tr:hover:not(.header-row) td:not(.region-name) { /* On hovering a row (except th
   text-align: center;
   border: none;
   background-color: #f2f2f2;
+}
+
+/* Background image for the HTML body */
+body {
+  background-image: url(./Pictures/background.jpg); /* https://reintech.io/blog/css-backgrounds-properties-and-techniques */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'Arial', sans-serif;
+  color: #000000;
 }
