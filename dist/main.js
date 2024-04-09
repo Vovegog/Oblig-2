@@ -105,7 +105,12 @@ function tableCreate(dstable) {
         let row = body.insertRow(i - 1);
         for (let j = 0; j < dstable[i].length; j++) {
             let cell = row.insertCell(j);
-            cell.innerHTML = dstable[i][j];
+            /* If the valuee is 0, we want to display it as a dash instead */
+            if (dstable[i][j] === 0) {
+                dstable[i][j] = '-';
+            } else { 
+                cell.innerHTML = dstable[i][j];
+            }
             if (j === 0) { // Here we check if the name of the region is the same. If it is, add to class repeated-region for CSS purposes
                 cell.classList.add('region-name');
                 if (dstable[i][j] === lastRegion) {
@@ -135,6 +140,9 @@ function doMath() {
     const math_table = document.getElementById('Math_table');
     let values = [];
     for (let i = 1; i < dstable.length; i++) {
+        if (dstable[i][3] === '-') { // If the value is 0, we want to skip it
+            continue;
+        }
         values.push(dstable[i][3]);
     }
     /* Now we have all the values in the table in the values array */
