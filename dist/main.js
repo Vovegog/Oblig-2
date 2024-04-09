@@ -98,12 +98,21 @@ function tableCreate(dstable) {
     cell.innerHTML = "År";
     cell = row.insertCell(3);
     cell.innerHTML = "Verdi";
+    row.classList.add('header-row');
     let body = table.createTBody();
+    let lastRegion = '';
     for (let i = 1; i < dstable.length; i++) {
         let row = body.insertRow(i - 1);
         for (let j = 0; j < dstable[i].length; j++) {
             let cell = row.insertCell(j);
             cell.innerHTML = dstable[i][j];
+            if (j === 0) { // Here we check if the name of the region is the same. If it is, add to class repeated-region for CSS purposes
+                cell.classList.add('region-name');
+                if (dstable[i][j] === lastRegion) {
+                    cell.classList.add('repeated-region');
+                }
+                lastRegion = dstable[i][j];
+            }
         }
     }
     return table;
