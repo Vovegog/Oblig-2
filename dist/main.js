@@ -167,11 +167,13 @@ function doMath() {
         math_table.innerHTML = "";
     }
     /* Now we need to inject these numbers into table "Math_table" */
-    math_table.innerHTML = 
-    `<table>` + `<tr><td>Average</td><td>${avg}</td></tr>` + 
+    math_table.innerHTML = // This table *could* be in one line, but it is easier to read this way
+    `<table>` + 
+    `<tr><td>Average</td><td>${avg}</td></tr>` + 
     `<tr><td>Min</td><td>${min}</td></tr>` + 
     `<tr><td>Max</td><td>${max}</td></tr>` + 
-    `<tr><td>Median</td><td>${median}</td></tr>` + `</table>`
+    `<tr><td>Median</td><td>${median}</td></tr>` + 
+    `</table>`
 }
 
 /* ----------------- API CALL ----------------- */
